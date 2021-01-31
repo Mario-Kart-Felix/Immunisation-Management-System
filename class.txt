@@ -1,0 +1,47 @@
+class Foo {
+    a?: string;
+    b?: string;
+    c: number;
+}
+
+....
+
+foo = new Foo();
+...
+if (foo.a !== undefined) { ... (access foo.a in a type-safe string manner) ... }
+class Foo {
+  a?: string;
+  b?: string;
+  c: number = 123;
+}
+class Bar {
+  a: number;
+  b?: number;
+}
+class Test {
+    constructor(public a: string, public b: string, public c?: string)
+    {
+    }
+}
+
+var test = new Test('foo', 'bar');
+class Bar {
+    a: number;
+    b?: number;
+    f() {
+        return 1;
+    }
+    g?(): number;  // Body of optional method can be omitted
+    h?() {
+        return 2;
+    }
+}
+function test(x: Bar) {
+    x.a;  // number
+    x.b;  // number | undefined
+    x.f;  // () => number
+    x.g;  // (() => number) | undefined
+    let f1 = x.f();            // number
+    let g1 = x.g && x.g();     // number | undefined
+    let g2 = x.g ? x.g() : 0;  // number
+}
